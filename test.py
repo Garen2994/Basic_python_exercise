@@ -61,7 +61,8 @@ print(L[2][2])
 '''
 #条件判断
 
-'''age = 20
+'''
+age = 20
 if age >= 18:
 	print('your age is',age)
 	print('adult')
@@ -77,7 +78,8 @@ else:
     print('kid')
 '''
 
-'''x = 2
+'''
+x = 2
 if x:
 	print('True')
 else:
@@ -115,7 +117,8 @@ while n <= 100:
 print('END')
 '''
 #使用continue打印出0-10之间的奇数
-'''n=0
+'''
+n=0
 while n < 10:
     n = n+1
     if n % 2 == 0:
@@ -351,12 +354,12 @@ extra = {'d': 99, 'x': '#'}
 print(f1(*nums,**extra)) #对于任意函数，都可以通过类似func(*args, **kw)的形式调用它，无论它的参数是如何定义的。
 '''
 #递归
-'''
+
 def fact(n):
     if n == 1:
         return 1
     return fact(n-1)*n
-print(fact(1000))
-'''
+print(fact(5))
+
 #March.19th 终于会把代码同步到Github了哈哈哈
 #第一次提交test修改

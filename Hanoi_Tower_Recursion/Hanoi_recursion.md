@@ -2,10 +2,6 @@
 
 - #### python代码
 
-```python
-
-```
-
 ```
 def move(n,a,b,c):
     if n==1:
@@ -23,10 +19,10 @@ move(3,'A','B','C')
 
 可用断点调试查看2个圆块情况的递归，如下：
 
-![](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1555322362006.png)
+![](https://github.com/Garen2994/Image/blob/master/img/001.png)
 
-![](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1555322507864.png)
+![](https://github.com/Garen2994/Image/blob/master/img/002.png)
 
 流程图理解3个圆块情况的递归函数调用：
 
-![](C:\Users\Administrator\Desktop\v2-59507a712f50971601587cc970f75904_r.jpg)
+![](https://github.com/Garen2994/Image/blob/master/img/hanoi.jpg)

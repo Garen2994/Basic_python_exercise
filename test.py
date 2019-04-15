@@ -354,12 +354,34 @@ extra = {'d': 99, 'x': '#'}
 print(f1(*nums,**extra)) #对于任意函数，都可以通过类似func(*args, **kw)的形式调用它，无论它的参数是如何定义的。
 '''
 #递归
-
+'''
 def fact(n):
     if n == 1:
         return 1
     return fact(n-1)*n
 print(fact(5))
+'''
+#尾递归
+'''
+def fact(n):
+    
+    return fact_iter(n,1)
 
-#March.19th 终于会把代码同步到Github了哈哈哈
-#第一次提交test修改
+def fact_iter(num,product):
+  
+    if num == 1 :
+        return product
+    return fact_iter(num-1,num*product)
+
+print(fact(100))
+'''
+#用递归函数实现汉诺塔的移动
+
+def move(n,a,b,c):
+    if n==1:
+        print(a,'->',c)
+    else:
+        move(n-1,a,c,b)
+        move(1,a,b,c)
+        move(n-1,b,a,c)
+move(2,'A','B','C')

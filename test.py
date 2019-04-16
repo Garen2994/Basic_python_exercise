@@ -387,7 +387,7 @@ def move(n,a,b,c):
 move(2,'A','B','C')
 '''
 #切片slice
-
+'''
 L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
 i,j = 2,4
 print(L[i:j])
@@ -397,3 +397,26 @@ print(int(s[1:4])+1)
 
 t = ('1','2','3','4')
 print(t[1:3])
+'''
+#利用切片操作，实现一个trim()函数，去除字符串首尾的空格，注意不要调用str的strip()方法
+'''
+def trim(s):
+    if s !='':
+        while s[:1] == ' ':
+            s = s[1:]
+        while s[-1:] == ' ':
+            s = s[:-1]
+    return s
+print(trim('  hello '))
+'''
+'''
+from collections import Iterable
+print(isinstance('ABC',Iterable))#str是否可迭代 True
+print(isinstance(123,Iterable))#z整数是否可迭代 False
+d = {'a' : 1,'b' : 2,'c' : 3}
+print(isinstance(d,Iterable))#字典可迭代
+'''
+
+for i, value in enumerate(['A', 'B', 'C']):
+    print(i, value)
+    

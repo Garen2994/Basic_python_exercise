@@ -1,6 +1,8 @@
 # Basic_python_exercise
-python基础 敲代码练习
+## python日常练习
 
-也是第一次使用Github同步代码
+[![Build Status](https://img.shields.io/travis/simple-icons/simple-icons/develop.svg)](https://travis-ci.org/simple-icons/simple-icons)
 
-嘻嘻
+:sunny::sunny:
+
+**Garen的练习草稿**

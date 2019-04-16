@@ -376,7 +376,7 @@ def fact_iter(num,product):
 print(fact(100))
 '''
 #用递归函数实现汉诺塔的移动
-
+'''
 def move(n,a,b,c):
     if n==1:
         print(a,'->',c)
@@ -385,3 +385,15 @@ def move(n,a,b,c):
         move(1,a,b,c)
         move(n-1,b,a,c)
 move(2,'A','B','C')
+'''
+#切片slice
+
+L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+i,j = 2,4
+print(L[i:j])
+
+s = '0123456789'
+print(int(s[1:4])+1)
+
+t = ('1','2','3','4')
+print(t[1:3])

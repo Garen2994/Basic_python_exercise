@@ -416,7 +416,25 @@ print(isinstance(123,Iterable))#z整数是否可迭代 False
 d = {'a' : 1,'b' : 2,'c' : 3}
 print(isinstance(d,Iterable))#字典可迭代
 '''
-
-for i, value in enumerate(['A', 'B', 'C']):
+'''
+for i, value in enumerate(['A', 'B', 'C']):#enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列
     print(i, value)
-    
+
+
+for i,j in [(1,10),(2,11),(3,12)]:
+    print(i,j)
+'''
+#使用迭代查找一个list中最小和最大值，并返回一个tuple
+
+def find_max_and_min(L):
+    if len(L) == 0:
+        return(None,None)
+    min=max=L[0]
+    for i in L:
+        if i < min:
+            min = i
+        elif i > max:
+            max = i
+    return (min,max)
+
+print(find_max_and_min([1,2,7,8,9,3,5]))

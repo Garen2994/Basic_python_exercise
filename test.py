@@ -425,7 +425,7 @@ for i,j in [(1,10),(2,11),(3,12)]:
     print(i,j)
 '''
 #使用迭代查找一个list中最小和最大值，并返回一个tuple
-
+'''
 def find_max_and_min(L):
     if len(L) == 0:
         return(None,None)
@@ -438,3 +438,327 @@ def find_max_and_min(L):
     return (min,max)
 
 print(find_max_and_min([1,2,7,8,9,3,5]))
+'''
+#列表生成式
+'''
+L = [x*x for x in range(1,11)]
+print(L)
+#带if判断
+c = [-1,3,-3,4,-5,-6,7,5]
+b = [x for x in c if x > 0]
+print(b)
+#多个列表运算
+a = [1,2,3,4,5]
+d = ['a',"b","c","d","e"]
+e = [str(x)+str(y)+str(z) for x , y , z in zip(a,d,c)]
+print(*zip(a,d,c))
+print(e)
+
+l = [m+n for m in 'XYZ' for n in 'ABC']
+print(l)
+'''
+
+#生成器、迭代器
+'''
+L = [x*x for x in range(1,11)]
+print(L)
+
+G = (x*x for x in range(1,11))
+
+for i in G:
+    print(i)
+'''
+'''
+def fib(max):
+    n,a,b = 0,0,1
+    while n < max:
+        yield b
+        a,b = b,a+b
+        n = n+1
+    return 'node'
+f = fib(6)
+print(f)
+for i in f:
+    print(i)
+'''
+
+#生成器函数打印杨辉三角
+'''
+def triangles():
+    L = [1]
+    while True:
+        yield L
+        L = [1] + [L[i]+L[i+1] for i in range(len(L)-1)] + [1]#首尾不变，生成中间部分
+
+#测试部分
+n = 0
+results = []
+for t in triangles():
+    print(t)
+    results.append(t)
+    n = n + 1
+    if n == 10:
+        break
+'''
+'''
+#生成一个1000万个数字的列表，分别使用列表生成式和生成器时返回结果的时间和所占内存空间的大小
+import time
+import sys
+
+time_start = time.time()
+g1 = [x for x in range(10000000)]
+time_end = time.time()
+print('列表生成式返回结果花费的时间： %s' % (time_end - time_start))
+print('列表生成式返回结果占用内存大小：%s' % sys.getsizeof(g1))
+
+def my_range(start, end):
+    for x in range(start, end):
+        yield x
+
+time_start = time.time()
+g2 = my_range(0, 10000000)
+time_end = time.time()
+print('生成器返回结果花费的时间： %s' % (time_end - time_start))
+print('生成器返回结果占用内存大小：%s' % sys.getsizeof(g2))
+'''
+
+#高阶函数：函数式编程
+#****函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数***
+
+'''
+a = abs(-10)
+print(a)
+
+f = abs
+b = f(-10)
+print(b)
+'''
+'''
+def add(x,y,f):
+
+    return f(x) + f(y)
+
+print(add(-10,-9,abs)) #abs函数名作为参数传入 add就是一个高阶函数啦
+'''
+'''
+#map函数
+
+def f(x):
+    return x * x
+r = map(f,[1,2,3,4,5,6,7,8,9])
+print(list(r))
+
+print(list(map(abs, [-1, -2, -3, -4, 5, -6, -7, 8, 9]))) 
+'''
+#reduce函数
+'''
+from functools import reduce
+
+def add(x, y):
+    return x + y
+
+print(reduce(add, [1, 3, 5, 7, 9]))
+
+
+def char2num(c):
+    digits = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+    return digits[c]
+
+def fn(x,y):
+    return x * 10 + y 
+print(reduce(fn,map(char2num,'13579')))
+print(isinstance(reduce(fn,map(char2num,'13579')),int))
+
+
+DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+
+def str2int(s):#相当于int()的功能
+    def fn(x, y):
+        return x * 10 + y
+    def char2num(s):
+        return DIGITS[s]
+    return reduce(lambda x, y: x * 10 + y, map(char2num, s))
+print(str2int('1345'))  
+'''
+
+#利用map()函数，把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。
+
+'''from functools import reduce
+
+L1 = ['adam', 'LISA', 'barT']
+def normalize(name):
+    return name.capitalize()
+    
+L2 = list(map(normalize, L1))
+print(L2)
+
+#sum()函数可以接受一个list并求和，请编写一个prod()函数，可以接受一个list并利用reduce()求积
+def prod(L):
+    return reduce(lambda x,y : x*y, L)
+print(prod([1,2,3,4,5]))
+
+#利用map和reduce编写一个str2float函数，把字符串'123.456'转换成浮点数123.456
+DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+def str2float(s):
+    s1,s2 = s.split('.')
+    def char2num(s):
+        return DIGITS[s]
+    return reduce(lambda x,y : x*10+y , map(char2num,s1)) + reduce(lambda x,y : x*10+y , map(char2num,s2))/pow(10,len(s2))
+print(isinstance(str2float('123.456'),float))
+print(str2float('123.456'))
+'''
+# filter函数
+'''from functools import reduce
+def is_odd(n):
+    return n % 2 == 1
+print(reduce(lambda x,y:x*10+y,list(filter(is_odd,[1,2,3,4,5,6,7,9]))))
+
+def not_empty(s):
+    return s and s.strip()
+
+print(list(filter(not_empty, ['A', '', 'B', None, 'C', '  '])))
+
+'''
+#埃氏筛法计算素数
+'''
+def _odd_iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+def _not_divisible(n):
+    return lambda x : x % n > 0
+
+def primes():
+    yield 2
+    it = _odd_iter()
+    while True:
+        n = next(it)
+        yield n
+        it = filter(_not_divisible(n),it)
+for n in primes():
+    if n < 1000:
+        print(n)
+    else:
+        break
+#用filter()计算出回数12321,909等
+'''
+'''
+def is_palinderome(n): 
+    return str(n) == str(n)[::-1] #s[::1]实现字符串翻转           
+print(list(filter(is_palinderome,range(1,1000))))
+'''
+'''
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+
+def by_name(t):
+    return t[0]
+
+def by_score(t):
+    return (t[1])
+
+L1 = sorted(L, key=by_name)
+print(L1)
+
+L2 = sorted(L , key=by_score , reverse = True)
+print(L2)
+'''
+
+#返回函数
+'''
+def calc_sum(*args):
+    ax = 0
+    for n in args:
+        ax = ax + n
+    return ax
+print(calc_sum(1,2,3,4,5,6))   
+
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum #返回求和的函数
+f1 = lazy_sum(1,2,3,4,5,6)
+f2 = lazy_sum(1,2,3,4,5,6)
+
+print(f1) 
+print(f1())
+print(f1==f2)
+print(f1()==f2()) #每次调用都会返回一个新的函数，即使传入相同的参数.f1()和f2()的调用结果互不影响
+'''
+'''
+def count():
+    fs = []
+    for i in range(1,4):
+        def f():
+            return i*i
+        fs.append(f)
+    return fs
+f1,f2,f3 = count()
+
+print(f1())
+print(f2())
+print(f3())
+
+'''
+'''
+def count():
+    def f(j):
+        def g():
+            return  j * j
+        return g
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()
+    return fs
+f1,f2,f3 = count()
+
+print(f1())
+print(f2())
+print(f3())
+'''
+#利用闭包返回一个计数器函数，每次调用它返回递增整数
+'''
+def createCounter():
+    a = 0
+    def counter():
+        nonlocal a
+        a += 1 #要么a说明使用外层变量；要么a就要是个容器(如下)
+        return a
+    return counter
+
+counterA = createCounter()
+print(counterA(), counterA(), counterA(), counterA(), counterA())
+#a = [0]只会在counterA = createCounter()赋值语句时执行，调用counterA()只执行counter()函数，并且可以使用a这个变量。
+
+def createCounter():
+    a = [0]
+    def counter():
+        a[0] = a[0]+1 
+        return a[0]
+    return counter
+
+counterA = createCounter()
+print(counterA(), counterA(), counterA(), counterA(), counterA())
+'''
+'''
+def now():
+    print('2015-3-25')
+f = now
+print(now.__name__)
+print(f.__name__)
+'''
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text,func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log('execute')
+def now():
+    print('2015-3-25')
+print(now())

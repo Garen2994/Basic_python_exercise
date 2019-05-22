@@ -750,6 +750,7 @@ f = now
 print(now.__name__)
 print(f.__name__)
 '''
+'''
 def log(text):
     def decorator(func):
         def wrapper(*args, **kw):
@@ -761,4 +762,61 @@ def log(text):
 @log('execute')
 def now():
     print('2015-3-25')
-print(now())
+now()
+print(dir(log))
+'''
+'''
+def a_new_decorator(a_func):
+ 
+    def wrapTheFunction():
+        print("I am doing some boring work before executing a_func()")
+ 
+        a_func()
+ 
+        print("I am doing some boring work after executing a_func()")
+ 
+    return wrapTheFunction
+@a_new_decorator
+#the @a_new_decorator is just a short way of saying:
+#a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)
+def a_function_requiring_decoration():
+    print("I am the function which needs some decoration to remove my foul smell")
+a_function_requiring_decoration()
+#outputs: "I am the function which needs some decoration to remove my foul smell"
+'''
+#设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间
+import time, functools
+
+def metric(fn):
+    @functools.wraps(fn)
+    def wrapper(*args,**kw):
+        start = time.time() #计算函数执行时间
+        result = fn(*args,**kw)
+        stop = time.time()
+        print('%s executed in %s ms' % (fn.__name__, (stop-start)*1000))
+        return result
+    return wrapper
+
+@metric
+def fast(x, y):
+    time.sleep(0.0012)
+    return x + y
+
+@metric
+def slow(x, y, z):
+    time.sleep(0.1234)
+    return x * y * z
+
+f = fast(11, 22)
+
+print(f)
+print(fast.__name__) 
+s = slow(11, 22, 33)
+print(s)
+
+if f != 33:
+    print('测试失败!')
+elif s != 7986:
+    print('测试失败!')
+else:
+    print('测试成功!')

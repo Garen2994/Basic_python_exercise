@@ -785,6 +785,7 @@ a_function_requiring_decoration()
 #outputs: "I am the function which needs some decoration to remove my foul smell"
 '''
 #设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间
+'''
 import time, functools
 
 def metric(fn):
@@ -797,7 +798,7 @@ def metric(fn):
         return result
     return wrapper
 
-@metric
+@metric  #这里为 fast = matric(fast)
 def fast(x, y):
     time.sleep(0.0012)
     return x + y
@@ -807,10 +808,10 @@ def slow(x, y, z):
     time.sleep(0.1234)
     return x * y * z
 
-f = fast(11, 22)
+f = fast(11, 22) #这里调用fast将执行返回的新函数wrapper()
 
-print(f)
-print(fast.__name__) 
+print(f) 
+print(fast.__name__) #如果不用functools.wrap()这里就会打印新函数名字wrapper() 
 s = slow(11, 22, 33)
 print(s)
 
@@ -820,3 +821,45 @@ elif s != 7986:
     print('测试失败!')
 else:
     print('测试成功!')
+
+#偏函数
+import functools
+int2 = functools.partial(int,base=2)
+a = int2('10001')
+print(a)
+'''
+#@Date  : 2019-05-22
+#模块
+'''
+ a test module '
+
+__author__ = 'Garen Hou'
+
+import sys
+
+def test():
+    args = sys.argv
+    if len(args)==1:
+        print('Hello, world!')
+    elif len(args)==2:
+        print('Hello, %s!' % args[1])
+    elif len(args)==3:
+        print('Three arguments!')
+        print('Bye, %s!' % args[2])
+
+if __name__=='__main__':
+    test()   #在命令行导入模块hello，用hello.test()才能执行函数
+'''
+def _private_1(name):
+    return 'Hello, %s' % name
+
+def _private_2(name):
+    return 'Hi, %s' % name
+
+def greeting(name):
+    if len(name) > 3:
+        return _private_1(name)
+    else:
+        return _private_2(name)
+
+print(greeting(['Garen','Hou']))

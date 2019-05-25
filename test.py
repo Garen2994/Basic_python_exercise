@@ -829,7 +829,8 @@ a = int2('10001')
 print(a)
 '''
 #@Date  : 2019-05-22
-#模块
+
+#模块的使用
 '''
  a test module '
 
@@ -850,6 +851,7 @@ def test():
 if __name__=='__main__':
     test()   #在命令行导入模块hello，用hello.test()才能执行函数
 '''
+'''
 def _private_1(name):
     return 'Hello, %s' % name
 
@@ -863,3 +865,23 @@ def greeting(name):
         return _private_2(name)
 
 print(greeting(['Garen','Hou']))
+'''
+
+# ****OOP来啦~~~****
+class Student(object):
+    def __init__(self,name,score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print('%s : %s'%(self.__name,self.__score))
+
+bart = Student('Bart Simpson',59)
+lisa = Student('Lisa Simpson',87)
+
+print(bart.__name)
+lisa.print_score()
+
+bart.age = 17
+print(bart.age)
+

@@ -868,6 +868,7 @@ print(greeting(['Garen','Hou']))
 '''
 
 # ****OOP来啦~~~****
+'''
 class Student(object):
     def __init__(self,name,score):
         self.__name = name
@@ -876,12 +877,29 @@ class Student(object):
     def print_score(self):
         print('%s : %s'%(self.__name,self.__score))
 
+    def get_name(self):
+        return self.__name
+
+    def get_score(self):
+        return self.__score
+    def set_score(self, score):
+        self.__score = score
 bart = Student('Bart Simpson',59)
 lisa = Student('Lisa Simpson',87)
 
-print(bart.__name)
+print(bart.get_name())
 lisa.print_score()
-
+lisa.set_score(90)
+print(lisa.get_score())
 bart.age = 17
 print(bart.age)
-
+'''
+class Animal(object):
+    def run(self):
+        print('Animal is running...')
+class Dog(Animal):
+    pass
+class Cat(Animal):
+    pass
+dog = Dog()
+print(dog.run())

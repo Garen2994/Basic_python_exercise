@@ -894,12 +894,90 @@ print(lisa.get_score())
 bart.age = 17
 print(bart.age)
 '''
+#多态
+
+'''
 class Animal(object):
     def run(self):
         print('Animal is running...')
 class Dog(Animal):
-    pass
+    def run(self):
+        print('Dog is running...')
+    def eat(self):
+        print('Eating meat...')
 class Cat(Animal):
-    pass
+    def run(self):
+        print('Dog is running...')
+class Timer(object):
+    def run(self):
+        print('Start...')
 dog = Dog()
-print(dog.run())
+#@print(dog.run())
+
+print(dir(dog))
+def run_twice(animal):
+    animal.run()
+    animal.run()
+#动态语言的“鸭子类型”
+print(run_twice(Timer()))
+
+class MyObject(object):
+    def __init__(self):
+        self.x = 9
+    def power(self):
+        return self.x * self.x
+
+obj = MyObject()
+
+print(hasattr(obj,'x')) #是否有属性x
+setattr(obj, 'y', 19) # 设置一个属性'y'
+print(hasattr(obj, 'y')) # 有属性'y'吗？
+print(getattr(obj, 'y')) # 获取属性'y'
+'''
+#实例
+'''
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+s = Student('Bob')
+s.score = 90
+print(s.score)
+'''
+'''
+class Student(object):
+    name = 'Student'
+
+s = Student()
+print(s.name)
+
+s.name = 'Michael'
+print(s.name) #给实例绑定name属性
+'''
+#为了统计学生人数，可以给Student类增加一个类属性，每创建一个实例，该属性自动增加
+
+
+class Student(object):
+
+    count = 0
+
+    def __init__(self, name):
+
+        self.name = name
+
+        Student.count=Student.count+1
+
+        
+if Student.count != 0:
+    print('测试失败!')
+else:
+    bart = Student('Bart')
+    if Student.count != 1:
+        print('测试失败!')
+    else:
+        lisa = Student('Bart')
+        if Student.count != 2:
+            print('测试失败!')
+        else:
+            print('Students:', Student.count)
+            print('测试通过!')
